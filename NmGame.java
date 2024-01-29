@@ -6,9 +6,12 @@ public class NmGame {
     Player player2;
     Rules gameRules;
 
-    public void initializeGame(int startingSticks) {
-        player1 = new Human();
-        player2 = new Computer();
+    public NmGame(PlayerInitializer initializer) {
+        player1 = initializer.getPlayer();
+        player2 = initializer.getPlayer();
+    }
+
+    public void startGame(int startingSticks) {
         gameRules = new Rules();
         sticksRemaining = startingSticks;
         firstPlayersTurn = true;
@@ -28,9 +31,7 @@ public class NmGame {
 
     private int letPlayerDrawSticks(Player player) {
         int sticksDrawn;
-        do {
-            sticksDrawn = player.drawSticks(sticksRemaining);
-        } while (!gameRules.checkForAllowedMove(sticksDrawn, sticksRemaining));
+        sticksDrawn = player.drawSticksAccordingToRules(sticksRemaining, gameRules);
         System.out.println(player.getPlayerType() + " draws " + sticksDrawn + ".");
         return sticksDrawn;
     }
@@ -41,12 +42,14 @@ public class NmGame {
     }
 
     public static void main(String[] args) {
+        // fix with if
         try {
             int startValue = Integer.valueOf(args[0]);
-            NmGame playing = new NmGame();
-            playing.initializeGame(startValue);
+            NmGame playing = new NmGame(new PlayerInitializer());
+            playing.startGame(startValue);
         } catch (Exception e) {
             System.out.println("Define the amount of starting sticks.");
+            e.printStackTrace();
             System.exit(0);
         }
     }

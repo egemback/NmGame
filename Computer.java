@@ -3,7 +3,7 @@ public class Computer extends Player {
         super("Computer");
     }
 
-    public int drawSticks(int sticksRemaining) {
+    public int drawSticksAccordingToRules(int sticksRemaining, Rules gameRules) {
         int numberOfSticksDrawn;
         if (sticksRemaining <= 3) {
             numberOfSticksDrawn = 1;
@@ -11,7 +11,7 @@ public class Computer extends Player {
         else {
             do {
                 numberOfSticksDrawn = (int) (Math.floorDiv(sticksRemaining, 2) * Math.random());
-            } while (numberOfSticksDrawn < 1);
+            } while (!gameRules.checkForAllowedMove(numberOfSticksDrawn, sticksRemaining));
         }
         return numberOfSticksDrawn;
     }

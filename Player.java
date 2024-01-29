@@ -1,13 +1,13 @@
 public abstract class Player {
-    private String playerType;
+    private final String type;
 
     public Player(String type) {
-        this.playerType = type;
+        this.type = type;
     }
 
     public String getPlayerType() {
-        return this.playerType;
+        return this.type;
     }
 
-    abstract int drawSticks(int sticksRemaining);
+    abstract public int drawSticksAccordingToRules(int sticksRemaining, Rules gameRules);
 }

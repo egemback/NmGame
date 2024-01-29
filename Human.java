@@ -1,26 +1,20 @@
-import java.util.Scanner;
-
 public class Human extends Player {
-    private Scanner userInput;
+    private UserInput userInput;
     private int maximumMove;
 
     public Human() {
         super("Human");
-        userInput = new Scanner(System.in);
+        userInput = new UserInput();
     }
 
-    public int drawSticks(int sticksRemaining) {
+    public int drawSticksAccordingToRules(int sticksRemaining, Rules gameRules) {
+        int numberOfSticksDrawn;
         System.out.println("Sticks remaining: " + sticksRemaining);
         maximumMove = (int) Math.floorDiv(sticksRemaining, 2);
-        return gettingUserInput(maximumMove);
-    }
-
-    private int gettingUserInput(int maximum) {
-        try {
-            System.out.println("How many do you want to draw?: " + "\n" + "Maximum: " + maximum + "\nMinimum: 1");
-            return Integer.valueOf(userInput.next());
-        } catch (Exception e) {
-            return -1;
-        }
+        do {
+            System.out.println("How many do you want to draw?: \nMaximum: " + maximumMove + "\nMinimum: 1");
+            numberOfSticksDrawn = userInput.gettingPositiveIntegerInput();
+        } while (!gameRules.checkForAllowedMove(numberOfSticksDrawn, sticksRemaining));
+        return numberOfSticksDrawn;
     }
 }
