@@ -1,14 +1,12 @@
 public class NmGame {
     private int sticksRemaining;
     private boolean firstPlayersTurn;
-    private int sticksDrawn;
-    private static int startValue;
 
     Player player1;
     Player player2;
     Rules gameRules;
 
-    public void startGame(int startingSticks) {
+    public void initializeGame(int startingSticks) {
         player1 = new Human();
         player2 = new Computer();
         gameRules = new Rules();
@@ -18,29 +16,38 @@ public class NmGame {
         playRound(player1);
     }
 
-    public void playRound(Player player) {
-        do {
-            sticksDrawn = player.drawSticks(sticksRemaining);
-        } while (!gameRules.checkForAllowedMove(sticksDrawn, sticksRemaining));
-        System.out.println(player.getPlayerType() + " draws " + sticksDrawn + ".");
-        sticksRemaining -= sticksDrawn;
+    private void playRound(Player player) {
+        sticksRemaining -= letPlayerDrawSticks(player);
         if (gameRules.checkForVictory(sticksRemaining)) {
             System.out.println("Game ended!" + "\n" + player.getPlayerType() + " won!");
         }
         else {
-            firstPlayersTurn = !firstPlayersTurn;
-            if (firstPlayersTurn) playRound(player1); else playRound(player2);
+            playNextRound(player);
         }
+    }
+
+    private int letPlayerDrawSticks(Player player) {
+        int sticksDrawn;
+        do {
+            sticksDrawn = player.drawSticks(sticksRemaining);
+        } while (!gameRules.checkForAllowedMove(sticksDrawn, sticksRemaining));
+        System.out.println(player.getPlayerType() + " draws " + sticksDrawn + ".");
+        return sticksDrawn;
+    }
+
+    private void playNextRound(Player player) {
+        firstPlayersTurn = !firstPlayersTurn;
+        if (firstPlayersTurn) playRound(player1); else playRound(player2);
     }
 
     public static void main(String[] args) {
         try {
-            startValue = Integer.valueOf(args[0]);
+            int startValue = Integer.valueOf(args[0]);
+            NmGame playing = new NmGame();
+            playing.initializeGame(startValue);
         } catch (Exception e) {
             System.out.println("Define the amount of starting sticks.");
             System.exit(0);
         }
-        NmGame playing = new NmGame();
-        playing.startGame(startValue);
     }
 }
