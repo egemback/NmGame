@@ -1,35 +1,35 @@
 public class NmGame {
-    public int sticksRemaining;
-    public boolean humansTurn;
-    public int sticksDrawn;
-    public static int startValue;
+    private int sticksRemaining;
+    private boolean firstPlayersTurn;
+    private int sticksDrawn;
+    private static int startValue;
 
-    Player humanPlayer;
-    Player computerPlayer;
+    Player player1;
+    Player player2;
     Rules gameRules;
 
     public void startGame(int startingSticks) {
-        humanPlayer = new Human();
-        computerPlayer = new Computer();
+        player1 = new Human();
+        player2 = new Computer();
         gameRules = new Rules();
         sticksRemaining = startingSticks;
-        humansTurn = true;
-        System.out.println("Welcome To Nm" + "\n" + "Player 1: Human" + "\n" + "Player 2: Computer");
-        playRound(humanPlayer);
+        firstPlayersTurn = true;
+        System.out.println("Welcome To Nm" + "\n" + "Player 1: " + player1.getPlayerType() + "\n" + "Player 2: " + player2.getPlayerType());
+        playRound(player1);
     }
 
     public void playRound(Player player) {
         do {
-            sticksDrawn = player.makeMove(sticksRemaining);
+            sticksDrawn = player.drawSticks(sticksRemaining);
         } while (!gameRules.checkForAllowedMove(sticksDrawn, sticksRemaining));
-        System.out.println(player.playerType + " draws " + sticksDrawn + ".");
+        System.out.println(player.getPlayerType() + " draws " + sticksDrawn + ".");
         sticksRemaining -= sticksDrawn;
         if (gameRules.checkForVictory(sticksRemaining)) {
-            System.out.println("Game ended!" + "\n" + player.playerType + " won!");
+            System.out.println("Game ended!" + "\n" + player.getPlayerType() + " won!");
         }
         else {
-            humansTurn = !humansTurn;
-            if (humansTurn) playRound(humanPlayer); else playRound(computerPlayer);
+            firstPlayersTurn = !firstPlayersTurn;
+            if (firstPlayersTurn) playRound(player1); else playRound(player2);
         }
     }
 
