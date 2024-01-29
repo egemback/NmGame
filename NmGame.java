@@ -42,15 +42,8 @@ public class NmGame {
     }
 
     public static void main(String[] args) {
-        // fix with if
-        try {
-            int startValue = Integer.valueOf(args[0]);
-            NmGame playing = new NmGame(new PlayerInitializer());
-            playing.startGame(startValue);
-        } catch (Exception e) {
-            System.out.println("Define the amount of starting sticks.");
-            e.printStackTrace();
-            System.exit(0);
-        }
+        int startValue = new UserInput().gettingPositiveIntegerInput("How many sticks do you want to play with? (integer)");
+        NmGame playing = new NmGame(new PlayerInitializer());
+        playing.startGame(startValue);
     }
 }
