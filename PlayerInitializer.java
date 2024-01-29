@@ -8,8 +8,7 @@ public class PlayerInitializer {
     private Player askUser() {
         UserInput userInput = new UserInput();
         do {
-            System.out.println("Write 1 for human or 2 for computer: ");
-            input = userInput.gettingPositiveIntegerInput();
+            input = userInput.gettingPositiveIntegerInput("Write 1 for human or 2 for computer: ");
         } while (input != 1 && input != 2);
         return (input == 1) ? new Human() : new Computer();
     }
