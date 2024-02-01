@@ -6,7 +6,7 @@ public class NmGame {
     Player player2;
     Rules gameRules;
 
-    public NmGame(PlayerInitializer initializer) {
+    private NmGame(PlayerInitializer initializer) {
         System.out.println("Choose two player types:");
         player1 = initializer.getPlayer();
         System.out.println("Player 1: " + player1.getPlayerType());
@@ -14,7 +14,7 @@ public class NmGame {
         System.out.println("Player 2: " + player2.getPlayerType());
     }
 
-    public void startGame(int startingSticks) {
+    private void startGame(int startingSticks) {
         gameRules = new Rules();
         sticksRemaining = startingSticks;
         firstPlayersTurn = true;
