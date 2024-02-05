@@ -19,7 +19,10 @@ public class NmGame {
         sticksRemaining = startingSticks;
         firstPlayersTurn = true;
         System.out.println("\nWelcome To Nm" + "\n" + "Player 1: " + player1.getPlayerType() + "\n" + "Player 2: " + player2.getPlayerType());
-        playRound(player1);
+        int randomStartPlayer = (int) Math.ceil((2*Math.random()));
+        Player startPlayer = (randomStartPlayer == 1) ? player1 : player2;
+        System.err.println("\n" + startPlayer.getPlayerType() + " plays the first round.");
+        playRound(startPlayer);
     }
 
     private void playRound(Player player) {
