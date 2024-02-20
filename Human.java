@@ -1,6 +1,6 @@
 public class Human extends Player {
     private UserInput userInput;
-    private int maximumMove;
+    private int maximumAllowedSticksMove;
 
     public Human() {
         super("Human");
@@ -10,9 +10,9 @@ public class Human extends Player {
     public int drawSticksAccordingToRules(int sticksRemaining, Rules gameRules) {
         int numberOfSticksDrawn;
         System.out.println("Sticks remaining: " + sticksRemaining);
-        maximumMove = (int) Math.floorDiv(sticksRemaining, 2);
+        maximumAllowedSticksMove = (int) Math.floorDiv(sticksRemaining, 2);
         do {
-            String message = "How many do you want to draw?: \nMaximum: " + maximumMove + "\nMinimum: 1";
+            String message = "How many do you want to draw?: \nMaximum: " + maximumAllowedSticksMove + "\nMinimum: 1";
             numberOfSticksDrawn = userInput.gettingPositiveIntegerInput(message);
         } while (!gameRules.checkForAllowedMove(numberOfSticksDrawn, sticksRemaining));
         return numberOfSticksDrawn;

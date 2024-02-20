@@ -18,17 +18,17 @@ public class NmGame {
         gameRules = new Rules();
         sticksRemaining = startingSticks;
         firstPlayersTurn = true;
-        System.out.println("\nWelcome To Nm" + "\n" + "Player 1: " + player1.getPlayerType() + "\n" + "Player 2: " + player2.getPlayerType());
+        System.out.println("\nWelcome To Nm\n" + gameRules.displayRules() + "\nPlayer 1: " + player1.getPlayerType() + "\n" + "Player 2: " + player2.getPlayerType());
         int randomStartPlayer = (int) Math.ceil((2*Math.random()));
         Player startPlayer = (randomStartPlayer == 1) ? player1 : player2;
-        System.err.println("\n" + startPlayer.getPlayerType() + " plays the first round.");
+        System.err.println(startPlayer.getPlayerType() + " plays the first round.");
         playRound(startPlayer);
     }
 
     private void playRound(Player player) {
         sticksRemaining -= letPlayerDrawSticks(player);
         if (gameRules.checkForVictory(sticksRemaining)) {
-            System.out.println("Game ended!" + "\n" + player.getPlayerType() + " won!");
+            System.out.println("Game ended!\n" + player.getPlayerType() + " won!");
         }
         else {
             playNextRound(player);
