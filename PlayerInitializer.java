@@ -1,10 +1,25 @@
+/**
+ * @author Elias Gembäck
+ * elias.gemback@gmail.com
+ */
+
 public class PlayerInitializer {
     private int input;
 
+    /**
+     * The method retunrs which type of player the user wants.
+     * 
+     * @return
+     */
     public Player getPlayer() {
         return askUser();
     }
 
+    /**
+     * This method asks the user which type of player it wants to play with and checks if it's an acceptable answer.
+     * 
+     * @return
+     */
     private Player askUser() {
         UserInput userInput = new UserInput();
         do {

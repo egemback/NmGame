@@ -1,12 +1,23 @@
+/**
+ * @author Elias Gembäck
+ * elias.gemback@gmail.com
+ */
+
 public class Human extends Player {
     private UserInput userInput;
     private int maximumAllowedSticksMove;
 
+    /**
+     * Constructor that defines the type in the superclass and creates the userInput object.
+     */
     public Human() {
         super("Human");
         userInput = new UserInput();
     }
 
+    /**
+     * This method draws sticks by asking the user until an acceptable input has been given.
+     */
     public int drawSticksAccordingToRules(int sticksRemaining, Rules gameRules) {
         int numberOfSticksDrawn;
         System.out.println("Sticks remaining: " + sticksRemaining);
