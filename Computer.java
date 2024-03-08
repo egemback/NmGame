@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+ /**
+  * Class containing computer specific methods.
+  */
 public class Computer extends Player {   
     /**
      * Constructor that calls the superclass to define the type.

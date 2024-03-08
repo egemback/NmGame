@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+  /**
+  * Class containing human specific methods.
+  */
 public class Human extends Player {
     private UserInput userInput;
     private int maximumAllowedSticksMove;

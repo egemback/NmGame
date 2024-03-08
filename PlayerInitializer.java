@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+ /**
+  * Class over initialization of each player and their type.
+  */
 public class PlayerInitializer {
     private int input;
 

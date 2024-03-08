@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+ /**
+  * An abstract class over the player no matter the type.
+  */
 public abstract class Player {
     private final String type;
 

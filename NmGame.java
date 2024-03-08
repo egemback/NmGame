@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+ /**
+  * Class over the most important and central methods of the game.
+  */
 public class NmGame {
     private int sticksRemaining;
     private boolean firstPlayersTurn;
@@ -39,7 +42,7 @@ public class NmGame {
         int randomStartPlayer = (int) Math.ceil((2*Math.random()));
         Player startPlayer = (randomStartPlayer == 1) ? player1 : player2;
         System.err.println(startPlayer.getPlayerType() + " plays the first round.");
-        playRound(startPlayer);
+        playRoundV2(startPlayer);
     }
 
     /**
@@ -54,7 +57,18 @@ public class NmGame {
             System.out.println("Game ended!\n" + player.getPlayerType() + " won!");
         }
         else {
-            playNextRound(player);
+            playNextRound();
+        }
+    }
+
+    private void playRoundV2(Player player) {
+        while (sticksRemaining > 1) {
+            sticksRemaining -= letPlayerDrawSticks(player);
+            if (gameRules.checkForVictory(sticksRemaining)) {
+                System.out.println("Game ended!\n" + player.getPlayerType() + " won!");
+                break;
+            }
+            else player = returnSecondPlayer();
         }
     }
 
@@ -77,9 +91,14 @@ public class NmGame {
      * 
      * @param player
      */
-    private void playNextRound(Player player) {
+    private void playNextRound() {
         firstPlayersTurn = !firstPlayersTurn;
         if (firstPlayersTurn) playRound(player1); else playRound(player2);
+    }
+
+    private Player returnSecondPlayer() {
+        firstPlayersTurn = !firstPlayersTurn;
+        return (firstPlayersTurn) ? player1 : player2;
     }
 
     /**

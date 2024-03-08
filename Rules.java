@@ -3,6 +3,9 @@
  * elias.gemback@gmail.com
  */
 
+ /**
+  * Class containing methods regarding the rules.
+  */
 public class Rules {
     /**
      * The method checks if a move is allowed or not depending on the parameters.

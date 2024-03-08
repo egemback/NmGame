@@ -5,6 +5,9 @@
 
 import java.util.Scanner;
 
+/**
+ * Class containing methods that make contact with the human player.
+ */
 public class UserInput {
     private Scanner userInput = new Scanner(System.in);
 
